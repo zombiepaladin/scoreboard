@@ -1,0 +1,43 @@
+<h1 class="page-header">
+ Administrative Reports
+</h1>
+
+<ul class="report-list">
+
+  <li>
+    <%= link_to "Unique Logins Report", admin_reports_unique_logins_path, class: "btn btn-info" %>
+    Displays the number of unique participant logins by day.
+  </li>
+
+  <li>
+    <%= link_to "Player Timelines Report", admin_reports_player_timelines_path, class: "btn btn-info" %>
+    Displays timeline for individual players
+  </li>
+
+  <li>
+    <%= link_to "Player Details Report", admin_reports_player_details_path, class: "btn btn-info" %>
+    Displays detailed report for individual players, including join time and completion time for all tasks, in Excell workbook format
+  </li>
+  
+  <li>
+    <%= link_to "Task Completion Report", admin_reports_task_completion_path, class: "btn btn-info" %>
+    Displays the number of tasks completed by day by all participants in the game.
+  </li>
+
+  <li>
+    <%= link_to "Task Details Report", admin_reports_task_details_path, class: "btn btn-info" %>
+    Detailed report of task completion, including who completed each task when, in Excel workbook format.
+  </li>
+
+  <li>
+    <%= link_to "Points Awarded Report", admin_reports_points_awarded_path, class: "btn btn-info" %>
+    Displays the total number of points completed by day by all participants in the game.
+  </li>
+
+  <li>
+    <%= link_to "Download Maling List", admin_reports_mailing_list_path, class: "btn btn-info" %>
+    Provides a list of email addresses as a text file.
+  </li>
+  
+</div>
+

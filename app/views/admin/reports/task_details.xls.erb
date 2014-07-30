@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Summary">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Completions</Data></Cell>
+        <Cell><Data ss:Type="String">Completed By</Data></Cell>
+      </Row>
+    <% @tasks.each do |task| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= task.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= task.scores.count %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= task.users.collect(&:eid).join(", ") %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+<% @tasks.each do |task| %>
+  <Worksheet ss:Name="<%= task.name %> Details">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Completed</Data></Cell>
+        <Cell><Data ss:Type="String">EID</Data></Cell>
+        <Cell><Data ss:Type="String">Username</Data></Cell>
+      </Row>
+    <% task.scores.order(:created_at).each do |score| %>
+      <Row>
+        <Cell><Data ss:Type="Date"><%= score.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= score.user.eid %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= score.user.name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+<% end %>
+</Workbook>

@@ -1,0 +1,34 @@
+<h1 class="page-header">Tasks for <%= link_to @user.name, @user %></h1>
+
+<div class="row">
+
+  <div class="span8">
+      
+    <table class="table table-striped table-bordered admin-users-list">
+      <thead>
+        <tr>
+          <th>Task</td>
+          <th>Completed</th>
+          <th>Points Awarded</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+        <% score = @user.scores.where(:task_id => task.id).first %>
+          <tr>
+            <th><%= link_to task.name, task %></th>
+            <td><%= score ? score.updated_at : link_to( "Mark Complete", complete_task_admin_user_path(@user, task: task), method: :post, class: 'btn btn-danger btn-small' ) %></td>
+            <td>
+              <%= score.points if score %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="span4">
+    <%= render "admin/users/actions", user: @user %>
+  </div>
+  
+</div>

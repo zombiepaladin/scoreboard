@@ -1,0 +1,12 @@
+<h1 class="page-header">
+<%= link_to "&laquo; Back to Reports".html_safe, admin_reports_path, class: "btn pull-right" %>
+ Player Details
+</h1>
+
+<% @players.each do |player| %>
+  <h3>
+    <%= player.eid %>
+    <%= " (#{player.name})" if player.eid != player.name %> 
+  </h3>
+  <%= content_tag :div, "", id: "timeline-#{player.id}", class: "timeline", data: { timeline: user_timeline_data(player) } %>
+<% end %>

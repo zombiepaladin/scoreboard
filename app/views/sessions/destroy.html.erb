@@ -1,0 +1,14 @@
+<div class="row"><div class="offset3 span6">
+<h1 class="page-header">Game Over</h1>
+
+<p class="lead">You have been logged out of Ready Wildcat One. You may want to click below and log out of K-State as well.</p>
+
+<% 
+  if Rails.env.production? 
+    url = 'https://signin.k-state.edu/WebISO/logout'
+  else
+    url = 'https://cas.cis.ksu.edu/logout'
+  end
+%> 
+<p><%= link_to "Log out of K-State", url, class: 'btn btn-warning btn-block btn-large' %></p>
+</div></div>

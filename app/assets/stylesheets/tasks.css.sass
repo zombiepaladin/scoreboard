@@ -1,0 +1,24 @@
+tbody#sortable-tasks
+  tr.task
+    th.drag-handle
+      cursor: move
+.tasks
+  .task
+    border: 5px solid #ddd
+    padding: 15px 20px
+    margin-bottom: 15px
+    h2
+      margin: 0 0 10px
+    &.completed
+      opacity: 0.5
+      border-color: $green
+      .description, a
+        display: none
+      h2
+        margin: 0
+      &:before
+        content: "Completed"
+        background: $green
+        color: white
+        padding: 10px 15px
+        float: right

@@ -1,0 +1,9 @@
+<h1 class="page-header">Accept Terms and Conditions</h1>
+
+<p class="lead">You must read and accept the following terms and conditions to play:</p>
+
+<%= render :partial => "rules/terms_and_conditions" %>
+
+<br />
+
+<%= link_to "I accept the terms and conditions", accept_terms_user_path(current_user), class: "btn btn-success" %>

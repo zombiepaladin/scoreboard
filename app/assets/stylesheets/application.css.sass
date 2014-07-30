@@ -1,0 +1,84 @@
+@import "bootswatch/cosmo/variables"
+@import "bootstrap-responsive"
+@import "morris"
+@import "timeline"
+
+$navbarFontFamily: "Press Start 2P", monospace
+$headingsFontFamily: "Press Start 2P", monospace
+$sansFontFamily: "Play", sans-serif
+$baseFontFamily: $sansFontFamily
+$baseFontSize: 16px
+
+@import "bootstrap"
+@import "bootstrap-responsive"
+  
+h1
+  font-size: 30px
+h2
+  font-size: 20px
+h3
+  font-size: 16px
+
+.control-group.error 
+  .control-label
+    color: red
+  .help-inline
+    color: red
+  input
+    border-color: red
+    color: #bbbbbb
+  select
+    border-color: red
+    color: #bbbbbb
+  textarea
+    border-color: red
+    color: #bbbbbb
+    
+.navbar .nav li
+  line-height: 300%
+ 
+.navbar .brand img 
+  margin-right: 0.5em
+  
+.datepicker
+  td
+    cursor: pointer
+    &:hover
+      background: black
+  
+.admin-users-list
+  form
+    display: inline-block
+
+.administer-panel
+  background: #ffeecc
+  padding: 20px
+  margin-bottom: 20px
+  border: 1px solid #ffcc99
+  border-radius: 5px
+    
+.task-answer
+  text-align: center
+  textarea
+    +box-sizing(border-box)
+    display: block
+    width: 100%
+    height: 200px
+    font-size: 32px
+    padding: 15px
+    margin: 0 0 10px
+
+.centered
+  text-align: center
+
+#linkModal
+  .modal-body
+    .link-display
+      font-size: 1.2em
+      margin-bottom: 2em
+  
+@import "boards"
+@import "users"
+@import "tasks"
+@import "credits"
+@import "admin/reports"

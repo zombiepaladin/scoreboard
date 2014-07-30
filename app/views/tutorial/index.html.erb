@@ -1,0 +1,17 @@
+<h1 class="page-header">Tutorial</h1>
+
+<div class="row">
+  <%= @tutorial && @tutorial.youtube_embed.html_safe %>
+</div>
+  
+<% if current_user && current_user.admin? %>
+  <div class="row">
+    <h3>Change Tutorial Video</h3>
+    <%= simple_form_for Tutorial.new(), :url => '/admin/tutorial/change/' do |f| %>
+      <%= f.input :youtube_embed, label: "Youtube Embed Code", input_html: {rows: 5} %>
+      <%= f.submit value: "Use New Video", class: "btn" %>
+    <% end %>
+  </div>
+<% end %>
+
+</div>

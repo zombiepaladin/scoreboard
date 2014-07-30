@@ -1,0 +1,6 @@
+<h1 class="page-header">
+<%= link_to "&laquo; Back to Reports".html_safe, admin_reports_path, class: "btn pull-right" %>
+ Total Points Scored by Day
+</h1>
+
+<%= content_tag :div, "", id: "scores_chart", data: {scores: scores_chart_data} %>

@@ -1,0 +1,11 @@
+<h1 class="page-header">Active Tasks</h1>
+
+<div class='tasks'>
+  <% @tasks.each do |task| %>
+  <div class='task<%= " completed" if signed_in? && current_user.completed?(task) %>'>
+    <h2><%= task.name %></h2>
+    <div class='description'><%=simple_format task.description %></div>
+    <% if task.solution? %><%= link_to "Submit Answer", task_path(task), class: 'btn btn-success' %><% end %>
+  </div>
+  <% end %>
+</div>

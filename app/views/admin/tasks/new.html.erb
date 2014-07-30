@@ -1,0 +1,9 @@
+<h1 class="page-header">Create a New Task</h1>
+
+<%= simple_form_for @task, url: admin_tasks_path do |f| %>
+  <%= render "admin/tasks/form", f: f %>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Create Task</button>
+    <input type="reset" class="btn" value="Reset"> 
+  </div>
+<% end %>

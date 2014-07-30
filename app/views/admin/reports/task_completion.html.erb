@@ -1,0 +1,7 @@
+<h1 class="page-header">
+ <%= link_to "&laquo; Back to Reports".html_safe, admin_reports_path, class: "btn pull-right" %>
+ Task Completion Report
+</h1>
+
+<h2>Total Tasks Completed By All Students</h2>
+<%= content_tag :div, "", class: "report-chart", id: "total_task_completion_chart", data: {task_completion: all_tasks_chart_data} %>

@@ -1,0 +1,104 @@
+#eid-search
+  width: 80%
+  +box-sizing(border-box)
+  padding: 5px 8px
+  height: auto
+.dash
+  .selection
+    float: left
+    width: 20%
+    margin-right: 5%
+  .find
+    float: left
+    width: 70%
+.leaderboard
+  font-family: $sansFontFamily
+  padding: 0
+  margin: 0
+  .header
+    padding: 0
+    margin: 0
+    font-size: 1.4em
+    height: 1em
+    border-bottom: 4px solid #333
+    .rank
+      float: left
+      width: 10%
+      text-align: center
+    .name
+      float: left
+      width: 25%
+      text-align: center
+    .score
+      float: left
+      width: 25%
+      text-align: center
+    .milestones
+      float: left
+      width: 40%
+      text-align: center
+  .rankings
+    clear: left
+    counter-reset: leaderboard
+    counter-increment: 1
+    padding: 0
+    margin: 0
+    border-bottom: 2px solid #ccc
+    li
+      +box-sizing(border-box)
+      overflow: hidden
+      border: 2px solid #ccc
+      border-bottom: 0
+      +transition(all 0.2s)
+      &.faded
+        opacity: 0.5
+      &.squished
+        height: 0
+        margin: 0
+        padding: 0
+        border: 0
+      &.selected
+        border: solid 1px #aaa
+        background-color: #22CC33
+        color: white
+      list-style: none
+      background: white
+      color: #555
+      position: relative
+      padding: 5px
+      +box-sizing(border-box)
+      font-size: 1.4em
+      .name
+        display: inline-block
+        float: left
+        margin-left: 10%
+        width: 20%
+      .points
+        display: inline-block
+        float: left
+        width: 20%
+        text-align: right
+      .milestones
+        display: inline-block
+        float: left
+        margin-left: 5%
+        width: 40%
+        text-align: center
+        img
+          width: 20px
+          height: 20px
+      &:before
+        display: inline-block
+        float: left
+        width: 5%
+        text-align: right
+        content: counter(leaderboard)
+        counter-increment: leaderboard
+        color: #000000
+      &.selected
+        &:before
+          color: white
+a.load-more
+  color: #512888
+  &:hover
+    color: yellow

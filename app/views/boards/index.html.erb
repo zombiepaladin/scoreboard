@@ -1,0 +1,31 @@
+<h1 class="page-header"><%= (@category || "Overall").titleize %> Leaderboard</h1>
+
+<div class="dash row">
+  <div class="span4">
+    <%= label_tag "board", "View Leaderboard:" %>
+    <% options = (["Overall"] + Task::CATEGORIES).collect{|c| [c.titleize, c]} %>
+    <%= select_tag "board", options_for_select(options, @category) %>
+  </div>
+  <div class="span4">
+    <%= label_tag "find", "View Player:" %>
+    <input name="find" type="search" placeholder="Find score by EID..." id="eid-search" class="input-block" value="<%= @search %>"/>
+  </div>
+  <div style="clear: left"></div>
+</div>
+		
+<div class="leaderboard">	
+
+  <div class="header">
+    <div class="rank">Rank</div>
+    <div class="name">Player</div>
+    <div class="score">Score</div>
+    <div class="milestones">Milestones</div>
+  </div>
+  
+  <ol id='rankings' class='rankings'>
+    <%= render partial: "boards/user", collection: @users %>
+  </ol>
+  
+  <%= link_to "Load More Scores&hellip;".html_safe, @next_page_path, class: 'load-more' if @users.next_page %>
+
+</div>

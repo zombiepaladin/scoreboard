@@ -1,0 +1,32 @@
+<h1 class="page-header">User Admin</h1>
+
+<ul class="nav nav-pills">
+  <li<%=raw ' class="active"' unless params[:filter] %>><%= link_to "All Users", admin_users_path %></li>
+  <li<%=raw ' class="active"' if params[:filter] == 'frozen' %>><%= link_to "Frozen", admin_users_path(filter: 'frozen') %></li>
+  <li<%=raw ' class="active"' if params[:filter] == 'points_modified'%>><%= link_to "Points Modified", admin_users_path(filter: 'points_modified') %></li>
+  <li<%=raw ' class="active"' if params[:filter] == 'tasks_modified'%>><%= link_to "Tasks Modified", admin_users_path(filter: 'tasks_modified') %></li>
+  <li<%=raw ' class="active"' if params[:filter] == 'admins'%>><%= link_to "Admins", admin_users_path(filter: 'admins') %></li>
+</ul>
+
+<table class="table table-striped table-bordered admin-users-list">
+  <thead>
+    <tr>
+      <th>EID</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <th><%= link_to user.name, user_path(user) %></th>
+      <td><%= user.admin?? "Admin" : (user.freeze_points?? "Frozen" : "Normal") %></td>
+      <td>
+        <% unless user.admin? %>
+          <%= render "admin/users/actions", user: user %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

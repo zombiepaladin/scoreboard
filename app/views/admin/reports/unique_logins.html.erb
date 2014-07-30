@@ -1,0 +1,6 @@
+<h1 class="page-header">
+ <%= link_to "&laquo; Back to Reports".html_safe, admin_reports_path, class: "btn pull-right" %>
+ Unique Logins Per Day
+</h1>
+
+<%= content_tag :div, "", class: "report-chart", id: "unique_logins_chart", data: {logins: logins_chart_data} %>

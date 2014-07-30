@@ -1,0 +1,28 @@
+wb = xlsx_package.workbook
+wb.styles do |styles|
+  title = styles.add_style sz: 14, b: true
+  header = styles.add_style b: true
+  link = styles.add_style fg_color: "0000FF"
+
+  # Summary sheet
+  wb.add_worksheet(name: "Summary") do |sheet|
+    sheet.add_row ["Name", "Completions", "Completed By"], style: header
+    @tasks.each_with_index do |task, index|
+      sheet.add_row [task.name, task.scores.count, task.users.collect(&:eid).join(", ")], style: [link]
+      sheet.add_hyperlink location: "'Task #{index+1}'!A1", ref: "A#{index+2}", target: :sheet
+    end
+  end
+
+  # Task sheets
+  @tasks.each_with_index do |task, index|
+    wb.add_worksheet(name: "Task #{index+1}") do |sheet|
+      sheet.add_row ["Back to summary"], style: link
+      sheet.add_hyperlink location: "Summary!A#{index+2}", ref: "A1", target: :sheet
+      sheet.add_row ["Details for task #{ task.name }"], style: title
+      sheet.add_row ["Time Completed", "EID", "Username"], style: header
+      task.scores.order(:created_at).each do |score|
+        sheet.add_row [score.created_at, score.user.eid, score.user.name ]
+      end 
+   end
+  end 
+end

@@ -1,0 +1,34 @@
+categories = %w(BeThere SolveThis GetSchooled FindSomeone PlayTheBook)
+wb = xlsx_package.workbook
+wb.styles do |styles|
+  title = styles.add_style sz: 14, b: true
+  header = styles.add_style b: true
+  link = styles.add_style fg_color: "0000FF"
+
+  # Index sheet
+  wb.add_worksheet(name: "Index") do |sheet|
+    sheet.add_row ["Username", "EID", "Overall"] + categories, style: header
+    @players.each_with_index do |player, index|
+      sheet.add_row [player.name, player.eid, player.score] + categories.collect{|cat| player.score(cat)}, style: [link]
+      sheet.add_hyperlink location: "'Player #{index+1}'!A1", ref: "A#{index+2}", target: :sheet
+    end
+  end
+
+  # Details sheets
+  @players.each_with_index do |player, index| 
+    wb.add_worksheet(name: "Player #{index+1}") do |sheet|
+      sheet.add_row ["Back to player index"], style: link
+      sheet.add_hyperlink location: "Index!A#{index+2}", ref: "A1", target: :sheet
+      sheet.add_row ["Details for #{ player.name } (#{ player.eid })"], style: title
+      sheet.add_row ["Time", "Points", "Event"], style: header
+      sheet.add_row [player.created_at, "", "Joined the Game"]
+      player.scores.order(:created_at).each do |score| 
+        if(score.task)
+          sheet.add_row [score.created_at, score.points, "Completed #{ score.task.name }"]
+        else
+          sheet.add_row [score.created_at, score.points, "Awarded points by administrator #{score.admin.name}"]
+        end
+      end
+    end 
+  end 
+end

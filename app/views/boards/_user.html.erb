@@ -1,0 +1,25 @@
+<li>
+ 
+  <div class="rank">
+	</div>
+ 
+  <div class="name">
+		<% if signed_in? && current_user.admin? %>
+			<%= link_to user.name, user_path(user) %>
+		<% else %>
+			<%= user.name %>
+		<% end %>
+	</div>
+
+	<div class="points">
+		<%= user.score(@category) || "foo" %>
+	</div>
+
+  <div class="milestones">
+    <% user.milestones.each do |milestone| %>
+      <%= image_tag milestone.icon_url, alt: milestone.name, title: milestone.name %>
+    <% end %>
+  </div>
+
+
+</li>

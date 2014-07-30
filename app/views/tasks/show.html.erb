@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="span6 offset3">
+    <h1 class="page-header"><%= @task.name %></h1>
+    <% if @task.upcoming? %>
+      <p class="lead">This task hasn't started yet. Check back after <%= @task.starts_on.strftime("%B %d") %>.</p>
+    <% elsif @task.expired? %>
+      <p class="lead">This task expired <%= time_ago_in_words(@task.ends_on) %> ago.</p>
+    <% else %>
+      <% if @task.solution? %>
+        <%= form_tag solve_task_path(@task), method: :post, class: 'well task-answer' do %>
+          <%= text_area_tag :solution %>
+          <button type="submit" class="btn btn-success btn-large btn-block">Submit Answer</button>
+        <% end %>
+      <% else %>
+        <p class='lead'>This task cannot be completed by form submission. You must find another way!</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

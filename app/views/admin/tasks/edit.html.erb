@@ -1,0 +1,12 @@
+<h1 class="page-header">
+  <%= link_to "&laquo; Back to Tasks".html_safe, admin_tasks_path, class: "btn pull-right" %>
+  Editing Task '<%= @task.name %>'
+</h1>
+
+<%= simple_form_for @task, url: admin_task_path(@task) do |f| %>
+  <%= render "admin/tasks/form", f: f %>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Update Task</button>
+    <input type="reset" class="btn" value="Reset"> 
+  </div>
+<% end %>

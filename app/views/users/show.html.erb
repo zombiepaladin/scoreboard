@@ -1,0 +1,69 @@
+<h1 class="page-header user-handle">
+ <%= @user.name %>
+ <%= "(#{ @user.eid })" if current_user.admin? %>
+ <%= link_to "(change)", edit_user_path(@user) %>
+</h1>
+
+<div class="row">
+  <div class="span-12  score-callout">
+    You currently have <span><%= @user.score %></span> points!
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h2>Score Log</h2>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Points</th>
+          <th>Earned</th>
+          <% if current_user.admin? %><th>Actions</th><th>Approving Admin</th><% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @scores.each do |score| %>
+          <tr>
+            <th><% unless score.approved? %><i class='icon icon-warning-sign' title='Pending approval by an admin.'></i> <% end %>
+                <% if score.task %>
+                  <%= score.task.name %>
+                <% else %>
+                  Points assigned by administrator <u><%= score.admin.name %></u>
+                <% end %>
+            </th>
+            <td><%= score.points %></td>
+            <td><%= time_ago_in_words(score.created_at) %> ago</td>
+            <% if current_user.admin? %>
+            <td>
+              <%= link_to "Approve", approve_admin_score_path(score), method: :put, class: 'btn btn-success btn-small' unless score.approved? %>
+              <%= link_to "Deny", deny_admin_score_path(score), method: :put, class: 'btn btn-danger btn-small' if score.approved? %>
+            </td>
+            <td>
+              <%= score.admin.name if score.admin %>
+            </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="span4">
+        
+    <% if current_user.admin? %>
+      <h2>Administrate</h2>
+      <%= render "admin/users/actions", user: @user %>
+    <% end %>
+
+    <h2>Milestones</h2>
+
+    <ul class='milestone-list'>
+      <% @milestones.each do |milestone| %>
+      <li>
+        <%= image_tag milestone.icon_url %>
+        <span class="name"><%= milestone.name %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

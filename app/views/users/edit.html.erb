@@ -1,0 +1,22 @@
+<h1 class="page-header">
+  Rename <%= @user.name %>
+</h1>
+
+<%= simple_form_for @user, url: user_path(@user) do |f| %>
+  <div class="row">
+    <div class="span4">
+      <%= f.input :name %>
+    </div>
+    <div class="span8">
+      <p>
+        Enter a new name in the field to the left.  This will be
+        the name displayed publicly on the leaderboards with your
+        score and milestone achievements.
+      </p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Rename User</button>
+    <input type="reset" class="btn" value="Reset"> 
+  </div>
+<% end %>
