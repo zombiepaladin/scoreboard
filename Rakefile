@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-ReadyWildcatOne::Application.load_tasks
+Scoreboard::Application.load_tasks
